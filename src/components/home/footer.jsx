@@ -1,175 +1,147 @@
 import React from "react";
 import {
   Facebook,
+  Instagram,
+  Locate,
+  LucideLinkedin,
+  LucideYoutube,
+  MailIcon,
+  MapPin,
+  Phone,
+  PhoneIcon,
   Twitter,
   Youtube,
-  Linkedin,
-  MessageCircle,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer className="bg-[#030c22] text-white py-12 px-4 md:px-8">
-      <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12 items-center">
-          <div className="col-span-1 md:col-span-2">
-            <p className="mb-4 text-left">
-              We are here to dispel the notion that collections are the dark
-              underbelly of the financial ecosystem. Technology meets empathy in
-              our process to craft digital debt resolution strategies that help
-              your customers complete their debt obligations fearlessly and
-              improve long-term relationships.
+    <div className="bg-violet-900 pt-16">
+      <div className="w-full px-4 xl:px-0">
+        <div className="flex flex-col justify-between sm:px-[18px] items-center md:flex-row md:px-10">
+          <div className="w-full md:w-[516px] flex flex-col items-center">
+            <p className="text-[18px] font-medium text-white"></p>
+            <h1 className="text-white font-extrabold flex flex-col md:flex-row items-center gap-2">
+              <img
+                src="/svg/law_marshal_logo.svg"
+                alt=""
+                width={40}
+                height={40}
+              />
+              <span className="text-3xl">Law Marshal</span>
+            </h1>
+            <p />
+            <p className="mt-[18px] text-[15px] font-normal text-white/[80%]">
+              We aim to build long term relationships by exceeding customer
+              expectations through our business dealings
             </p>
-          </div>
-          <div className="flex justify-end items-start">
-            <button className="bg-white text-black text-navy-900 py-2 px-4 rounded-full flex items-center">
-              <MessageCircle size={20} className="mr-2" />
-              Let's talk
-            </button>
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-20 mb-12 text-left">
-          <div>
-            <h3 className="text-blue-400 mb-8">Our Location</h3>
-            <p className="text-sm mb-2">
-              Unit A, 6th Floor, Technoples I, Technoples Complex opp Veer
-              Savarkar Flyover,
-            </p>
-            <p className="text-sm mb-2">
-              Goregaon Mumbai City Maharashtra 400062, India
-            </p>
-            <p className="text-sm mb-2">Credavenue Spocto Technology Limited</p>
-            <p className="text-sm mb-2">
-              Unit 1102 Index Tower, DIFC, Dubai, UAE
-            </p>
-            <p className="text-sm">
-              Wholly owned subsidiary of Spocto Solutions India Pvt. Ltd.
-            </p>
-          </div>
-          <div>
-            <h3 className="text-blue-400 mb-8">Contact us</h3>
-            <p className="text-sm mb-2">+91 22 20684445</p>
-            <p className="text-sm">+971 (04) 234 5613</p>
-          </div>
-          <div>
-            <h3 className="text-blue-400 mb-8">Email us</h3>
-            <p className="text-sm mb-2">hello@spocto.com</p>
-            <p className="text-xs">(Only for marketing-related enquiries)</p>
-            <p className="text-sm">marhtab@spocto.com</p>
-          </div>
-        </div>
-
-        <div className="mb-12">
-          <h3 className="text-blue-400 mb-8">Products and Services</h3>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div>
-              <Link to="/">
-                <p className="text-sm mb-2">Connect</p>
+            <div className="mt-[18px] flex items-center justify-center gap-4">
+              <Link to={"/"} className="hover:scale-110" target="_blank">
+                <Facebook />
               </Link>
-              <Link to="/">
-                <p className="text-sm mb-2">Smart Settle</p>
+              <Link to={"/"} className="hover:scale-110" target="_blank">
+                <LucideLinkedin />
               </Link>
-              <Link to="/">
-                <p className="text-sm">Recommendation Guru</p>
+              <Link to={"/"} className="hover:scale-110" target="_blank">
+                <Instagram />
               </Link>
-            </div>
-            <div>
-              <Link to="/">
-                <p className="text-sm mb-2">Smart Legal</p>
+              <Link to={"/"} className="hover:scale-110" target="_blank">
+                <Twitter />
               </Link>
-              <Link to="/">
-                <p className="text-sm mb-2">Field Plus</p>
-              </Link>
-              <Link to="/">
-                <p className="text-sm">Bhaasa</p>
-              </Link>
-            </div>
-            <div>
-              <Link to="/">
-                <p className="text-sm mb-2">Pay Dues</p>
-              </Link>
-              <Link to="/">
-                <p className="text-sm mb-2">Call Plus</p>
-              </Link>
-              <Link to="/">
-                <p className="text-sm">spocto Score</p>
-              </Link>
-            </div>
-            <div>
-              <Link to="/">
-                <p className="text-sm mb-2">Vigil</p>
-              </Link>
-              <Link to="/">
-                <p className="text-sm">Smart Collect</p>
+              <Link to={"/"} className="hover:scale-110" target="_blank">
+                <LucideYoutube />
               </Link>
             </div>
           </div>
-        </div>
-
-        <div className="flex flex-wrap justify-between items-center mb-8">
-          <div className="flex space-x-4 mb-8 md:mb-0">
-            <a href="#" className="text-white hover:text-blue-400">
-              <Facebook size={20} />
-            </a>
-            <a href="#" className="text-white hover:text-blue-400">
-              <Twitter size={20} />
-            </a>
-            <a href="#" className="text-white hover:text-blue-400">
-              <Youtube size={20} />
-            </a>
-            <a href="#" className="text-white hover:text-blue-400">
-              <Linkedin size={20} />
-            </a>
+          <div className="flex flex-col items-center  md:items-start">
+            <div className="mt-[23px] flex items-center">
+              <div className="flex h-[38px] w-[38px] items-center justify-center rounded-[75%]">
+                <PhoneIcon />
+              </div>
+              <div className="ml-[18px]">
+                <Link
+                  to={"/"}
+                  href="tel:+911800123444"
+                  className="font-Inter text-[14px] font-medium text-white"
+                >
+                  +91 1800123444
+                </Link>
+              </div>
+            </div>
+            <div className="mt-[23px] flex items-center">
+              <div className="flex h-[38px] w-[38px] items-center justify-center rounded-[75%]">
+                <MailIcon />
+              </div>
+              <div className="ml-[18px]">
+                <Link
+                  to={"/"}
+                  href="mailto:help@lorem.com"
+                  className="font-Inter text-[14px] font-medium text-[#fff]"
+                >
+                  help@lorem.com
+                </Link>
+              </div>
+            </div>
+            <div className="mt-[23px] flex items-center">
+              <div className="flex h-[38px] w-[38px] items-center justify-center rounded-[75%]">
+                <MapPin />
+              </div>
+              <div className="ml-[18px]">
+                <Link
+                  to={"/"}
+                  href="mailto:help@lorem.com"
+                  className="font-Inter text-[14px] font-medium text-[#fff]"
+                >
+                  Sub Nerul, Mumbia, India, 123456
+                </Link>
+              </div>
+            </div>
           </div>
-          <div className="flex flex-wrap space-x-4 text-xs">
-            <a href="#" className="hover:text-blue-400">
-              Legal & Compliance
-            </a>
-            <a href="#" className="hover:text-blue-400">
-              Privacy
-            </a>
-            <a href="#" className="hover:text-blue-400">
-              Grievance Policy
-            </a>
-            <a href="#" className="hover:text-blue-400">
-              CSR Policy
-            </a>
-            <a href="#" className="hover:text-blue-400">
-              CSR Committee
-            </a>
-            <a href="#" className="hover:text-blue-400">
-              Terms of Use
-            </a>
+          <div className="mt-6 flex w-full flex-col items-center justify-between text-white sm:flex-row md:mt-0 md:max-w-[341px]">
+            <div className="mt-6 flex flex-col gap-4 sm:mt-0">
+              <p className="text-deutziawhite font-inter text-[18px] font-medium">
+                Download the app
+              </p>
+              <div className="flex gap-4 sm:flex-col">
+                <Link to={"/"} target="_blank">
+                  <img
+                    alt="facebook icon"
+                    loading="lazy"
+                    width={168}
+                    height={50}
+                    decoding="async"
+                    data-nimg={1}
+                    style={{ color: "transparent" }}
+                    src="https://www.englishyaari.com/img/google-store.svg"
+                  />
+                </Link>
+                <Link to={"/"} target="_blank">
+                  <img
+                    alt="facebook icon"
+                    loading="lazy"
+                    width={168}
+                    height={50}
+                    decoding="async"
+                    data-nimg={1}
+                    style={{ color: "transparent" }}
+                    src="https://www.englishyaari.com/img/apple-store.svg"
+                  />
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
-
-        <div className="text-center text-xs">
-          <p className="mb-2">
-            <a href="#" className="hover:text-blue-400">
-              Disclaimer Support Annual Return 2023
-            </a>{" "}
-            |
-            <a href="#" className="hover:text-blue-400">
-              Annual Return 2022
-            </a>{" "}
-            |
-            <a href="#" className="hover:text-blue-400">
-              Annual Return 2021
-            </a>{" "}
-            |
-            <a href="#" className="hover:text-blue-400">
-              Annual Return 2020
-            </a>
-          </p>
-          <p>
-            All Rights Reserved spocto 2023 for grievances:
-            grievancesofficer@spocto.com
+        <hr className="mt-[30px] text-white" />
+        <div className="flex items-center justify-center pb-8 pt-[9px] md:py-8">
+          <p className="text-[12px] font-normal text-white md:text-[14px]">
+            &copy; Copyright 2024 , All Rights Reserved by{" "}
+            <span className="font-bold">
+              Law Marshal&#46; Pvt&#46; Ltd&#46;
+            </span>
           </p>
         </div>
       </div>
-    </footer>
+    </div>
   );
 };
 

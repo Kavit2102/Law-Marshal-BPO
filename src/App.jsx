@@ -8,7 +8,8 @@ import Services from "./pages/services";
 import Contact from "./pages/contact";
 import Careers from "./pages/careers";
 import Products from "./pages/products";
-import OurPartnersPage from  "./pages/OurPartnersPage";
+import OurPartnersPage from "./pages/OurPartnersPage";
+
 function App() {
   return (
     <BrowserRouter>
