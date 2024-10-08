@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowRight, Users } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const OurPartnersPage = () => {
   const [visiblePartners, setVisiblePartners] = useState(0);
@@ -115,13 +116,12 @@ const OurPartnersPage = () => {
           <p className="text-xl mb-8 animate__animated animate__fadeInUp">
             If you're interested in becoming a partner or learning more about our collaborative efforts, we'd love to hear from you!
           </p>
-          <a
-            href="#contact"
+          <Link to="/contact"
             className="inline-flex items-center bg-white text-purple-700 font-semibold px-6 py-3 rounded-full hover:bg-gray-200 transition duration-300 ease-in-out transform hover:scale-105"
           >
             Contact Us
             <ArrowRight className="ml-2" />
-          </a>
+          </Link>
         </div>
       </section>
     </div>

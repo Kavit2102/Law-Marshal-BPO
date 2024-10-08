@@ -32,7 +32,7 @@ const ContactForm = () => {
   };
 
   return (
-    <section className="bg-gray-900 py-10">
+    <section className="bg-gray-900 py-20">
       <div className="mx-auto max-w-3xl px-4 py-6">
         <div className="flex items-center justify-center">
           <h2 className="text-3xl font-bold text-center text-white mb-6 flex items-center">
