@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import { Code, Server, Cloud, Shield } from 'lucide-react';
 import { useInView } from 'react-intersection-observer';
@@ -48,7 +48,7 @@ const ProductCard = ({ title, description, icon: Icon }) => {
   );
 };
 
-const FeaturedProduct = ({ title, description, imageSrc, imageAlt, reverse = false }) => {
+const FeaturedProduct = ({  title, description, imageSrc, imageAlt, reverse = false, lastItem = false }) => {
   const controls = useAnimation();
   const [ref, inView] = useInView({
     threshold: 0.1,
@@ -60,7 +60,6 @@ const FeaturedProduct = ({ title, description, imageSrc, imageAlt, reverse = fal
       controls.start('visible');
     }
   }, [controls, inView]);
-
   return (
     <motion.div 
       ref={ref}
@@ -71,7 +70,7 @@ const FeaturedProduct = ({ title, description, imageSrc, imageAlt, reverse = fal
         hidden: { opacity: 0, y: 50 }
       }}
       transition={{ duration: 0.8 }}
-      className={`relative ${reverse ? 'bg-gray-800' : 'bg-gray-900'} py-16`}
+      className={`relative ${reverse ? 'bg-gray-800' : 'bg-gray-900'} ${lastItem ? 'pb-0' : 'pb-16'} pt-16`} 
     >
       <div className="lg:mx-auto lg:grid lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-2 lg:gap-24 lg:px-8">
         <div className={`mx-auto max-w-xl px-6 lg:mx-0 lg:max-w-none lg:py-16 lg:px-0 ${reverse ? 'lg:col-start-2' : ''}`}>
@@ -82,7 +81,7 @@ const FeaturedProduct = ({ title, description, imageSrc, imageAlt, reverse = fal
             </div>
           </div>
         </div>
-        <div className="mt-12 sm:mt-16 lg :mt-0">
+        <div className="mt-12 sm:mt-16 lg:mt-0">
           <div className={`-ml-48 pr-6 md:-ml-16 lg:relative lg:m-0 lg:h-full lg:px-0 ${reverse ? 'lg:right-0' : 'lg:left-0'}`}>
             <img
               alt={imageAlt}
@@ -122,29 +121,18 @@ const Testimonial = ({ quote, author, company }) => (
   </div>
 );
 
-
-
 const Products = () => {
   const [activeTab, setActiveTab] = useState('all');
+  const productsRef = useRef(null);
 
   const techStack = [
-    { 
-      name: 'AI-Powered Analytics', 
-      icon: <Code className="w-12 h-12 text-cyan-400" />, 
-      description: 'Advanced data analysis for informed decision-making'
-    },
-    { 
-      name: 'Cloud Infrastructure', 
-      icon: <Cloud className="w-12 h-12 text-cyan-400" />, 
-      description: 'Scalable and secure cloud-based solutions'
-    },
     { 
       name: 'Automated Systems', 
       icon: <Server className="w-12 h-12 text-cyan-400" />, 
       description: 'Efficient outreach and communication management'
     },
     { 
-      name: 'Cybersecurity', 
+      name: 'security', 
       icon: <Shield className="w-12 h-12 text-cyan-400" />, 
       description: 'Robust protection for sensitive data and operations'
     },
@@ -156,22 +144,12 @@ const Products = () => {
     { quote: "Law Marshal BPO's solutions have significantly improved our debt recovery rates.", author: "Jane Doe", company: "XYZ Financial Services" },
   ];
 
+  const scrollToProducts = () => {
+    productsRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <div className="bg-gray-100 min-h-screen font-sans">
-      {/* Navigation */}
-      <nav className="bg-blue-900 text-white p-4 sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto flex justify-between items-center">
-          <h1 className="text-2xl font-bold">Law Marshal BPO</h1>
-          <div className="space-x-4">
-            {['Products', 'Services', 'About', 'Contact'].map((item) => (
-              <a key={item} href={`#${item.toLowerCase()}`} className="hover:text-blue-300 transition-colors">
-                {item}
-              </a>
-            ))}
-          </div>
-        </div>
-      </nav>
-
       {/* Hero Section */}
       <motion.section 
         className="bg-blue-900 text-white py-32 min-h-screen px-4 md:px-12 flex items-center justify-center"
@@ -187,6 +165,7 @@ const Products = () => {
           <motion.button
             className="bg-white text-blue-900 font-bold py-4 px-8 rounded-full hover:bg-blue-100 transition-colors duration-300"
             whileHover={{ y: -5 }}
+            onClick={scrollToProducts}
           >
             Explore Our Products
           </motion.button>
@@ -194,7 +173,7 @@ const Products = () => {
       </motion.section>
 
       {/* Featured Products Section */}
-      <section className="relative overflow-hidden bg-gray-900 pt-16 pb-32 space-y-24 ">
+      <section ref={productsRef} className="relative overflow-hidden bg-gray-800 pb-20    ">
         <FeaturedProduct 
           title="Collections as a Service"
           description="Our Collections as a Service (CaaS) offers end-to-end collections management, blending advanced technology and skilled manual intervention. Automated processes drive efficiency, while expert agents handle complex cases, ensuring faster recovery and improved customer experience."
@@ -202,82 +181,84 @@ const Products = () => {
           imageAlt="Collections as a Service"
         />
         <FeaturedProduct 
+         
           title="Customer Service Provider"
           description="Our Customer Service Solutions combine automated systems with personalized support to enhance efficiency while building strong customer relationships. We streamline interactions with AI-driven tools, ensuring quick resolutions and fostering lasting customer loyalty."
           imageSrc="https://images.unsplash.com/photo-1599134842279-fe807d23316e"
           imageAlt="Customer Service Provider"
           reverse
+          lastItem={true} 
         />
       </section>
 
       {/* Product Cards Section */}
-       <ProductCarousel />
+      <ProductCarousel />
 
       {/* Technology Stack Section */}
       <section className="bg-gradient-to-r from-gray-900 to-blue-900 py-20 px-4 md:px-12 overflow-hidden relative">
-      <div className="absolute inset-0 z-0 opacity-10">
-        <div className="absolute inset-0 bg-[url('/path/to/circuit-pattern.svg')] bg-repeat"></div>
-        <div className="absolute inset-0 bg-gradient-to-t from-transparent to-gray-900"></div>
-      </div>
-      <div className="max-w-6xl mx-auto relative z-10">
-        <motion.div 
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-        >
-          <h2 className="text-4xl font-bold mb-6 text-cyan-400">Our Technology Stack</h2>
-          <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-            We leverage cutting-edge technology to deliver innovative solutions that keep you ahead in the digital age.
-          </p>
-        </motion.div>
-        <div className="flex flex-wrap justify-center">
-          {techStack.map((tech, index) => (
-            <motion.div
-              key={tech.name}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-            >
-              <TechStack tech={tech} />
-            </motion.div>
-          ))}
+        <div className="absolute inset-0 z-0 opacity-10">
+          <div className="absolute inset-0 bg-[url('/path/to/circuit-pattern.svg')] bg-repeat"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-transparent to-gray-900"></div>
         </div>
-      </div>
-      <div className="absolute bottom-0 left-0 w-full h-20 bg-gradient-to-t from-gray-900 to-transparent"></div>
-    </section>
+        <div className="max-w-6xl mx-auto relative z-10">
+          <motion.div 
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <h2 className="text-4xl font-bold mb-6 text-cyan-400">Our Technology Stack</h2>
+            <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+              We leverage cutting-edge technology to deliver innovative solutions that keep you ahead in the digital age.
+            </p>
+          </motion.div>
+          <div className="flex flex-wrap justify-center">
+            {techStack.map((tech, index) => (
+              <motion.div
+                key={tech.name}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+              >
+                <TechStack tech={tech} />
+              </motion.div>
+            ))}
+          </div>
+        </div>
+        <div className="absolute bottom-0 left-0 w-full h-20 bg-gradient-to-t from-gray-900 to-transparent"></div>
+      </section>
+
       {/* Testimonials Section */}
       <section className="bg-gradient-to-br from-blue-900 to-blue-700 py-20 px-4 md:px-12">
-      <div className="max-w-7xl mx-auto">
-        <motion.div 
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-        >
-          <h2 className="text-4xl font-bold mb-6 text-white">What Our Clients Say</h2>
-          <p className="text-xl text-blue-100 max-w-2xl mx-auto">
-            Don't just take our word for it. Hear from our satisfied clients who have experienced the Law Marshal BPO difference.
-          </p>
-        </motion.div> <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {testimonials.map((testimonial, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.2 }}
-            >
-              <Testimonial {...testimonial} />
-            </motion.div>
-          ))}
+        <div className="max-w-7xl mx-auto">
+          <motion.div 
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <h2 className="text-4xl font-bold mb-6 text-white">What Our Clients Say</h2>
+            <p className="text-xl text-blue-100 max-w-2xl mx-auto">
+              Don't just take our word for it. Hear from our satisfied clients who have experienced the Law Marshal BPO difference.
+            </p>
+          </motion.div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {testimonials.map((testimonial, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.2 }}
+              >
+                <Testimonial {...testimonial} />
+              </motion.div>
+            ))}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
 
       {/* Call to Action Section */}
-      <CTASection></CTASection>
-
-      
+      <CTASection />
     </div>
   );
 };

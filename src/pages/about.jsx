@@ -46,41 +46,46 @@ const ValueCard = ({ icon, title, description, delay }) => (
   </motion.div>
 );
 
-// OurValues section integrated with framer-motion animations
+
 const OurValues = () => (
   <section className="py-24 px-6 md:px-12 bg-gradient-to-r from-blue-900 via-indigo-900 to-purple-900">
-    <div className="max-w-6xl mx-auto">
+    <div className="max-w-6xl mx-auto text-center"> 
       <motion.h2
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
-        className="text-5xl font-extrabold mb-16 text-center text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400"
+        className="text-5xl font-extrabold mb-16 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400 text-center"
       >
         Our Core Values
       </motion.h2>
+      
       <div className="grid md:grid-cols-3 gap-12">
         <ValueCard
-          icon={<FaAward />}
+          icon={<FaAward className="mx-auto" />} 
           title="Excellence"
           description="We strive for excellence in every interaction, ensuring the highest standards of service for our clients and their customers."
           delay={0.2}
+          className="text-center"  
         />
         <ValueCard
-          icon={<FaHandshake />}
+          icon={<FaHandshake className="mx-auto" />}  
           title="Integrity"
           description="We conduct our business with the utmost integrity, maintaining ethical standards and building trust with our clients and their customers."
           delay={0.4}
+          className="text-center"  
         />
         <ValueCard
-          icon={<FaLightbulb />}
+          icon={<FaLightbulb className="mx-auto" />}  
           title="Innovation"
           description="We embrace innovation, continuously improving our processes and leveraging cutting-edge technology to deliver superior results."
           delay={0.6}
+          className="text-center"  
         />
       </div>
     </div>
   </section>
 );
+
 
 // Main AboutUs component
 const AboutUs = () => {
@@ -133,20 +138,25 @@ const AboutUs = () => {
 
   return (
     <div className="bg-white text-black overflow-x-hidden">
-      {/* Hero Section */}
-<section className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-24 px-6 md:px-12 overflow-hidden">
+     {/* Hero Section */}
+<section className="bg-gradient-to-r from-indigo-600 to-purple-600  text-white py-40 px-6 md:px-12 overflow-hidden">
   <div className="max-w-6xl mx-auto relative">
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8 }}
+      className="text-center"  
     >
       <h1 className="text-5xl md:text-7xl font-extrabold mb-6 leading-tight tracking-tight">
         About <span className="text-yellow-300">Law Marshal</span>
       </h1>
-      <p className="text-xl md:text-2xl mb-10 font-light max-w-2xl">
+      
+      {/* Horizontally aligned paragraph with additional margin for spacing */}
+      <p className="text-xl md:text-2xl mb-12 font-light max-w-3xl mx-auto">
         Your trusted partner in innovative debt collection solutions, delivering excellence with integrity.
       </p>
+
+      {/* Button container */}
       <motion.div
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
@@ -177,6 +187,7 @@ const AboutUs = () => {
     </motion.div>
   </div>
 </section>
+
 
       {/* Company Overview */}
       <CompanyOverview />

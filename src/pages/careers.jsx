@@ -1,99 +1,194 @@
-import React from 'react';
-import { ChevronDown, Users, TrendingUp, Target } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import { ChevronUp, Users, TrendingUp, Target, Mail } from 'lucide-react';
 
 const CareersPage = () => {
+  const [scrollProgress, setScrollProgress] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const totalScroll = document.documentElement.scrollTop;
+      const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scroll = `${totalScroll / windowHeight}`;
+      setScrollProgress(scroll);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
-    <div className="bg-gray-900 min-h-screen text-white font-sans">
-      {/* Sticky Header */}
-      <header className="bg-gray-800 shadow-lg fixed top-0 left-0 right-0 z-50 transition-transform duration-500">
-        <div className="container mx-auto px-6 py-4">
-          <h1 className="text-4xl font-extrabold text-purple-400">Law Marshal BPO Careers</h1>
+    <div className="bg-gradient-to-b from-gray-900 to-purple-900 min-h-screen text-white font-sans">
+      {/* Hero Section */}
+      <section className="h-screen flex items-center justify-center relative overflow-hidden">
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+          className="text-center z-10"
+        >
+          <h1 className="text-7xl font-extrabold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">
+            Join Our Vision
+          </h1>
+          <p className="text-2xl text-gray-300 mb-8">Shape the future of business process outsourcing</p>
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="bg-purple-600 text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-purple-700 transition-colors duration-300"
+          >
+            Explore Opportunities
+          </motion.button>
+        </motion.div>
+        <div className="absolute inset-0 z-0">
+          <svg className="w-full h-full" viewBox="0 0 1000 1000" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style={{ stopColor: 'rgb(109, 40, 217)', stopOpacity: 0.2 }} />
+                <stop offset="100%" style={{ stopColor: 'rgb(236, 72, 153)', stopOpacity: 0.2 }} />
+              </linearGradient>
+            </defs>
+            <path d="M0,1000 C200,800 400,600 600,800 C800,1000 1000,800 1000,600 V0 H0 Z" fill="url(#grad1)">
+              <animate attributeName="d" 
+                       values="M0,1000 C200,800 400,600 600,800 C800,1000 1000,800 1000,600 V0 H0 Z;
+                               M0,1000 C200,900 400,700 600,800 C800,900 1000,700 1000,500 V0 H0 Z;
+                               M0,1000 C200,800 400,600 600,800 C800,1000 1000,800 1000,600 V0 H0 Z"
+                       dur="20s" repeatCount="indefinite" />
+            </path>
+          </svg>
         </div>
-      </header>
+      </section>
 
       {/* Company Culture Section */}
-      <section className="pt-24 pb-12 bg-gray-900">
+      <section className="py-24 bg-gray-800">
         <div className="container mx-auto px-6">
-          <h2 className="text-5xl font-extrabold text-center mb-8 text-white animate__animated animate__zoomIn">Why Work With Us?</h2>
-          <div className="flex flex-col md:flex-row items-center">
-            <div className="md:w-1/2 mb-8 md:mb-0 animate__animated animate__fadeInLeft">
-              <p className="text-xl text-gray-300 leading-relaxed">
-                At Law Marshal BPO, we believe that our employees are our greatest asset. We foster a collaborative, inclusive, and innovative environment where everyone can thrive.
-              </p>
-              <div className="flex justify-center mt-8 space-x-8">
-                <Users className="w-20 h-20 text-purple-500 hover:text-purple-400 transition-transform duration-300 hover:scale-110 transform" />
-                <TrendingUp className="w-20 h-20 text-purple-500 hover:text-purple-400 transition-transform duration-300 hover:scale-110 transform" />
-                <Target className="w-20 h-20 text-purple-500 hover:text-purple-400 transition-transform duration-300 hover:scale-110 transform" />
-              </div>
-            </div>
-            <div className="md:w-1/2 animate__animated animate__fadeInRight">
-              <img src="/api/placeholder/600/400" alt="Team building" className="rounded-lg shadow-2xl hover:scale-105 transition-transform duration-500 transform hover:shadow-purple-500" />
-            </div>
+          <motion.h2 
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-5xl font-extrabold text-center mb-16 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600"
+          >
+            Our Culture
+          </motion.h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+            {[
+              { icon: Users, title: "Collaborative", description: "Work with diverse, talented individuals" },
+              { icon: TrendingUp, title: "Growth-Oriented", description: "Continuous learning and development" },
+              { icon: Target, title: "Goal-Driven", description: "Achieve personal and professional milestones" }
+            ].map((item, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: index * 0.2 }}
+                className="bg-gray-700 rounded-lg p-8 text-center shadow-lg hover:shadow-purple-500/50 transition-shadow duration-300"
+              >
+                <item.icon className="w-16 h-16 text-purple-400 mx-auto mb-6" />
+                <h3 className="text-2xl font-semibold mb-4">{item.title}</h3>
+                <p className="text-gray-300">{item.description}</p>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Hiring Message Section */}
-      <section className="py-12 bg-gray-900">
-        <div className="container mx-auto px-6">
-          <h2 className="text-5xl font-bold text-center mb-12 text-purple-400 animate__animated animate__bounceIn">Join Our Team</h2>
-          <p className="text-center mb-8 text-lg text-gray-300 animate__animated animate__fadeIn animate__delay-1s">
-            We hire for various positions across different departments. If interested, please email your resume with a cover letter at
-            <a href="mailto:careers@lawmarshalbpo.com" className="text-purple-500 hover:underline"> careers@lawmarshalbpo.com</a>.
-          </p>
-        </div>
-      </section>
-
       {/* Employee Testimonials Section */}
-      <section className="py-12 bg-gray-800">
+      <section className="py-24 bg-gray-900">
         <div className="container mx-auto px-6">
-          <h2 className="text-5xl font-extrabold text-center mb-12 text-white">What Our Employees Say</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* First Testimonial Card */}
-            <div className="bg-gray-700 rounded-lg p-6 shadow-lg transform transition-transform duration-300 hover:scale-105">
-              <img src="/api/placeholder/100/100" alt="John Doe" className="w-24 h-24 rounded-full mx-auto mb-4" />
-              <p className="text-gray-400 mb-4 italic">"Law Marshal BPO has given me the opportunity to grow my career while being part of a supportive team."</p>
-              <p className="font-semibold text-purple-400">John Doe</p>
-              <p className="text-sm text-gray-500">Debt Recovery Specialist</p>
-            </div>
-
-            {/* Second Testimonial Card */}
-            <div className="bg-gray-700 rounded-lg p-6 shadow-lg transform transition-transform duration-300 hover:scale-105">
-              <img src="/api/placeholder/100/100" alt="Jane Smith" className="w-24 h-24 rounded-full mx-auto mb-4" />
-              <p className="text-gray-400 mb-4 italic">"The collaborative environment makes coming to work enjoyable and fulfilling."</p>
-              <p className="font-semibold text-purple-400">Jane Smith</p>
-              <p className="text-sm text-gray-500">Customer Service Representative</p>
-            </div>
-
-            {/* Third Testimonial Card */}
-            <div className="bg-gray-700 rounded-lg p-6 shadow-lg transform transition-transform duration-300 hover:scale-105">
-              <img src="/api/placeholder/100/100" alt="Alex Brown" className="w-24 h-24 rounded-full mx-auto mb-4" />
-              <p className="text-gray-400 mb-4 italic">"I appreciate the training and development opportunities provided by the company."</p>
-              <p className="font-semibold text-purple-400">Alex Brown</p>
-              <p className="text-sm text-gray-500">Data Analyst</p>
-            </div>
+          <motion.h2 
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-5xl font-extrabold text-center mb-16 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600"
+          >
+            Employee Stories
+          </motion.h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+            {[
+              { name: "John Doe", role: "Debt Recovery Specialist", quote: "Law Marshal BPO has given me the opportunity to grow my career while being part of a supportive team." },
+              { name: "Jane Smith", role: "Customer Service Representative", quote: "The collaborative environment makes coming to work enjoyable and fulfilling." },
+              { name: "Alex Brown", role: "Data Analyst", quote: "I appreciate the training and development opportunities provided by the company." }
+            ].map((testimonial, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: index * 0.2 }}
+                className="bg-gray-800 rounded-lg p-8 shadow-lg hover:shadow-purple-500/50 transition-shadow duration-300"
+              >
+                <img src={`/api/placeholder/100/100`} alt={testimonial.name} className="w-24 h-24 rounded-full mx-auto mb-6 border-4 border-purple-500" />
+                <p className="text-gray-300 mb-6 italic">"{testimonial.quote}"</p>
+                <p className="font-semibold text-purple-400">{testimonial.name}</p>
+                <p className="text-sm text-gray-500">{testimonial.role}</p>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* Call to Action Section */}
-      <section className="py-16 bg-purple-700 relative overflow-hidden">
+      <section className="py-24 bg-gradient-to-r from-purple-600 to-pink-600 relative overflow-hidden">
         <div className="container mx-auto px-6 relative z-10">
-          <h2 className="text-5xl font-bold text-center text-white mb-8 animate__animated animate__fadeIn">Ready to Start Your Career with Us?</h2>
-          <p className="text-2xl text-center text-white mb-8 animate__animated animate__fadeIn animate__delay-1s">Email us your resume to take the next step in your career.</p>
+          <motion.h2 
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-5xl font-bold text-center text-white mb-8"
+          >
+            Ready to Start Your Journey?
+          </motion.h2>
+          <motion.p 
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="text-2xl text-center text-white mb-12"
+          >
+            Join us in shaping the future of business process outsourcing
+          </motion.p>
+          <motion.div 
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="flex justify-center"
+          >
+            <a 
+              href="mailto:careers@lawmarshalbpo.com" 
+              className="flex items-center bg-white text-purple-600 px-8 py-3 rounded-full text-lg font-semibold hover:bg-gray-100 transition-colors duration-300"
+            >
+              <Mail className="w-6 h-6 mr-2" />
+              Apply Now
+            </a>
+          </motion.div>
         </div>
-        <div className="absolute inset-0 opacity-20 animate__animated animate__fadeIn animate__delay-2s">
-          <img src="/api/placeholder/1920/1080" alt="Background" className="w-full h-full object-cover" />
+        <div className="absolute inset-0 opacity-20">
+          <svg className="w-full h-full" viewBox="0 0 1000 1000" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0,1000 C200,800 400,600 600,800 C800,1000 1000,800 1000,600 V0 H0 Z" fill="white">
+              <animate attributeName="d" 
+                       values="M0,1000 C200,800 400,600 600,800 C800,1000 1000,800 1000,600 V0 H0 Z;
+                               M0,1000 C200,900 400,700 600,800 C800,900 1000,700 1000,500 V0 H0 Z;
+                               M0,1000 C200,800 400,600 600,800 C800,1000 1000,800 1000,600 V0 H0 Z"
+                       dur="20s" repeatCount="indefinite" />
+            </path>
+          </svg>
         </div>
       </section>
 
-      {/* Smooth Scroll Button */}
-      <button 
+      {/* Scroll Progress Bar */}
+      <motion.div 
+        className="fixed top-0 left-0 right-0 h-1 bg-purple-500 z-50"
+        style={{ scaleX: scrollProgress }}
+      />
+
+      {/* Scroll to Top Button */}
+      <motion.button 
         onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-        className="fixed bottom-8 right-8 bg-purple-600 text-white p-3 rounded-full shadow-2xl hover:bg-purple-700 transition-colors duration-300 animate__animated animate__fadeIn"
+        className="fixed bottom-8 right-8 bg-purple-600 text-white p-3 rounded-full shadow-2xl hover:bg-purple-700 transition-colors duration-300"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: scrollProgress > 0.2 ? 1 : 0 }}
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
       >
-        <ChevronDown className="w-6 h-6 transform rotate-180" />
-      </button>
+        <ChevronUp className="w-6 h-6" />
+      </motion.button>
     </div>
   );
 };

@@ -48,12 +48,12 @@ const ProductCarousel = () => {
   const prevProduct = () => {
     setCurrentIndex((prevIndex) => (prevIndex - 1 + products.length) % products.length);
   };
-
-  return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-gray-900 to-blue-900 pt-16 pb-20">
-      <div className="max-w-6xl mx-auto px-4">
-        <h1 className="text-3xl font-bold text-center text-white mb-8">What We Provide</h1>
-        <div className="relative h-[24rem] bg-white rounded-2xl shadow-2xl overflow-hidden">
+  
+    return (
+      <section className="relative overflow-hidden pt-12 bg-gradient-to-br from-gray-900 to-blue-900 pt-0 pb-20"> {/* Removed top padding */}
+        <div className="max-w-6xl mx-auto px-4">
+          <h1 className="text-3xl font-bold text-center text-white mb-8">What We Provide</h1>
+          <div className="relative h-[24rem] bg-white rounded-2xl shadow-2xl overflow-hidden">
           <AnimatePresence mode="wait">
             <motion.div
               key={currentIndex}
