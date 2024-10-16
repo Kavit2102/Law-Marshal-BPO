@@ -1,83 +1,89 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { NavLinks } from "../../utils/navbar";
+import { motion } from "framer-motion";
 
 const Navbar = () => {
-  return (
-    <header className="fixed top-0 left-0 w-full z-[100] transition-opacity duration-300 bg-black">
-      <div className="">
-        {/* <div className="absolute inset-0">
-          <img
-            className="object-cover w-full h-full"
-            src="https://cdn.rareblocks.xyz/collection/celebration/images/headers/3/coworking-space.jpg"
-            alt
-          />
-        </div> */}
+  const [isOpen, setIsOpen] = useState(false);
 
-        <div className="bg-black" />
-        <div className="px-4 sm:px-6">
-          <nav className="flex items-center justify-between h-16 lg:h-20">
-            <div className="flex-shrink-0">
-              <Link
-                to="/"
-                title
-                className="flex gap-2 items-center justify-center"
-              >
-                <img
-                  className="h-auto"
-                  src="/svg/law_marshal_logo.svg"
-                  alt="N/A"
-                  width={35}
-                />
-                <span className="font-semibold text-xl">Law Marshal</span>
-              </Link>
-            </div>
-            <button
-              type="button"
-              className="inline-flex p-2 text-white transition-all duration-200 rounded-md lg:hidden focus:bg-gray-800 hover:bg-gray-800"
-            >
-              <svg
-                className="w-6 h-6"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4 6h16M4 12h16m-7 6h7"
-                />
-              </svg>
-            </button>
-            <div className="hidden lg:flex lg:items-center lg:space-x-10">
-              {NavLinks.map((link) => {
-                return (
-                  <Link
-                    key={link.id}
-                    to={link.to}
-                    title
-                    className="text-base font-medium text-white"
-                  >
-                    {link.title}
-                  </Link>
-                );
-              })}
-            </div>
-            <Link
-              to="/"
-              title
-              className="items-center justify-center hidden px-6 py-3 text-base font-semibold text-black transition-all duration-200 bg-yellow-400 border border-transparent rounded-full lg:inline-flex hover:bg-yellow-500 focus:bg-yellow-500"
-              role="button"
-            >
-              {" "}
-              Join Now
+  const toggleMenu = () => setIsOpen(!isOpen);
+
+  return (
+    <header className="fixed top-0 left-0 w-full z-50 bg-gray-900 text-white shadow-lg transition-all duration-300">
+      <div className="container mx-auto px-4 sm:px-6">
+        <nav className="flex items-center justify-between h-16 lg:h-20">
+          <div className="flex-shrink-0">
+            <Link to="/" className="flex items-center">
+              <img src="/svg/law_marshal_logo.svg" alt="Logo" className="h-10" />
+              <span className="font-bold text-2xl ml-2">Law Marshal</span>
             </Link>
-          </nav>
-        </div>
+          </div>
+
+          <button
+            onClick={toggleMenu}
+            className="lg:hidden p-2 rounded-md hover:bg-gray-800 focus:outline-none focus:ring focus:ring-gray-700 transition-all duration-200"
+          >
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M4 6h16M4 12h16m-7 6h7"
+              />
+            </svg>
+          </button>
+
+          {/* Desktop Links */}
+          <div className="hidden lg:flex lg:items-center lg:space-x-10">
+            {NavLinks.map((link) => (
+              <Link
+                key={link.id}
+                to={link.to}
+                className="text-base font-medium hover:text-yellow-400 transition-colors duration-200"
+              >
+                {link.title}
+              </Link>
+            ))}
+          </div>
+
+          {/* Join Now Button */}
+          <Link
+            to="/"
+            className="hidden lg:inline-flex px-6 py-3 text-base font-semibold text-black bg-yellow-400 rounded-full hover:bg-yellow-500 transition-all duration-200"
+          >
+            Join Now
+          </Link>
+        </nav>
       </div>
-      {/* xs to lg */}
+
+      {/* Mobile Dropdown Menu */}
+      {isOpen && (
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          transition={{ duration: 0.3 }}
+          className="absolute top-full left-0 w-full bg-gray-800 text-white shadow-lg rounded-md mt-2"
+        >
+          <div className="flex flex-col space-y-2 p-4">
+            {NavLinks.map((link) => (
+              <Link
+                key={link.id}
+                to={link.to}
+                onClick={() => setIsOpen(false)}
+                className="text-base font-medium hover:text-yellow-400 transition-colors duration-200"
+              >
+                {link.title}
+              </Link>
+            ))}
+          </div>
+        </motion.div>
+      )}
     </header>
   );
 };

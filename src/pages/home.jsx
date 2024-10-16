@@ -3,7 +3,6 @@ import Marque from "../components/home/marque";
 import Features from "../components/home/features";
 import EfficientDebtCollection from "../components/home/efficientDebtCollection";
 import { Link } from "react-router-dom";
-import Footer from "../components/home/footer";
 import Industries from "../components/home/industries";
 
 const Home = () => {
@@ -59,11 +58,11 @@ const Home = () => {
           </div> */}
         </div>
       </div>
+
       <Marque />
       <Features />
       <Industries />
       <EfficientDebtCollection />
-      <Footer />
     </section>
   );
 };
