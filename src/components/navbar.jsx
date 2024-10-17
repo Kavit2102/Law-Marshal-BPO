@@ -9,9 +9,9 @@ const Navbar = () => {
   const toggleMenu = () => setIsOpen(!isOpen);
 
   return (
-    <header className="fixed top-0 left-0 w-full z-50 bg-gray-900 text-white shadow-lg transition-all duration-300">
+    <header className="fixed top-0 left-0 w-full z-[9999] bg-gray-900 text-white shadow-lg transition-all duration-300">
       <div className="container mx-auto px-4 sm:px-6">
-        <nav className="flex items-center justify-between h-16 lg:h-20">
+        <nav className="flex items-center justify-between h-16 lg:h-20 md:h-auto">
           <div className="flex-shrink-0">
             <Link to="/" className="flex items-center">
               <img src="/svg/law_marshal_logo.svg" alt="Logo" className="h-10" />
@@ -19,12 +19,13 @@ const Navbar = () => {
             </Link>
           </div>
 
+          {/* Toggle button for mobile */}
           <button
             onClick={toggleMenu}
-            className="lg:hidden p-2 rounded-md hover:bg-gray-800 focus:outline-none focus:ring focus:ring-gray-700 transition-all duration-200"
+            className="lg:hidden p-3 rounded-md bg-yellow-400 hover:bg-yellow-500 focus:outline-none focus:ring focus:ring-yellow-500 transition-all duration-200"
           >
             <svg
-              className="w-6 h-6"
+              className="w-6 h-6 text-black"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -68,7 +69,7 @@ const Navbar = () => {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -20 }}
           transition={{ duration: 0.3 }}
-          className="absolute top-full left-0 w-full bg-gray-800 text-white shadow-lg rounded-md mt-2"
+          className="absolute top-full left-0 w-full bg-gray-800 text-white shadow-lg rounded-md mt-2 z-[9999]"
         >
           <div className="flex flex-col space-y-2 p-4">
             {NavLinks.map((link) => (
