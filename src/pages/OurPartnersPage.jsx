@@ -1,9 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
 const OurPartnersPage = () => {
   const [selectedPartner, setSelectedPartner] = useState(null);
+  const partnersRef = useRef(null);
+
+  const scrollToPartners = (e) => {
+    e.preventDefault();
+    partnersRef.current.scrollIntoView({ behavior: 'smooth' });
+  };
 
   const partners = [
     { name: 'Bank of Baroda', description: 'Handling Bucket X for Agri Business with inbound/outbound calling.', icon: '🏦' },
@@ -62,9 +68,12 @@ const OurPartnersPage = () => {
             <p className="text-xl mb-8 text-gray-300">
               At Law Marshal BPO, we believe that collaboration is the key to delivering exceptional service. Our partners share our commitment to excellence, innovation, and customer satisfaction.
             </p>
-            <Link to="#partners" className="inline-block bg-purple-500 text-white font-semibold px-8 py-4 rounded-full hover:bg-purple-600 transition duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-lg">
+            <button 
+              onClick={scrollToPartners}
+              className="inline-block bg-purple-500 text-white font-semibold px-8 py-4 rounded-full hover:bg-purple-600 transition duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-lg"
+            >
               Explore Our Partners
-            </Link>
+            </button>
           </div>
           <div className="md:w-1/2 flex justify-center">
             <img src="/src/assets/whywhyreal.jpg" alt="Partnership Illustration" className="rounded-lg shadow-2xl" style={{ width: '100%', height: 'auto', maxWidth: '500px' }} />
@@ -73,7 +82,8 @@ const OurPartnersPage = () => {
       </section>
 
       {/* Partners Showcase Section */}
-      <section id="partners" className="py-32 bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900 relative overflow-hidden">
+      <section id="partners" ref={partnersRef} className="py-32 bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900 relative overflow-hidden">
+    
         <div className="container mx-auto px-4 relative z-10">
           <h2 className="text-6xl font-extrabold text-center mb-20 text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-purple-400 to-indigo-400">
             Our Trusted Partners

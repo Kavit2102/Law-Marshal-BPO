@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { ChevronUp, Users, TrendingUp, Target, Mail } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ChevronUp, Users, TrendingUp, Target, Mail, X } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const CareersPage = () => {
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [showPopup, setShowPopup] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -16,6 +18,44 @@ const CareersPage = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const ApplyNowPopup = () => (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+      onClick={() => setShowPopup(false)}
+    >
+      <motion.div
+        initial={{ y: 50, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        exit={{ y: 50, opacity: 0 }}
+        className="bg-white text-gray-800 p-8 rounded-lg shadow-xl max-w-md w-full mx-4"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="flex justify-between items-center mb-4">
+          <h3 className="text-2xl font-bold text-purple-600">Apply Now</h3>
+          <button onClick={() => setShowPopup(false)} className="text-gray-500 hover:text-gray-700">
+            <X className="w-6 h-6" />
+          </button>
+        </div>
+        <p className="mb-4">
+          To apply, please send your resume to <span className="font-semibold">careers@lawmarshalbpo.com</span> along with:
+        </p>
+        <ul className="list-disc list-inside mb-4">
+          <li>A cover letter</li>
+          <li>The position you're interested in</li>
+        </ul>
+        <p className="mb-4">
+          We will review your application and contact you soon regarding the next steps in the process.
+        </p>
+        <p className="text-sm text-gray-600 italic">
+          Thank you for your interest in joining Law Marshal BPO. We look forward to reviewing your application!
+        </p>
+      </motion.div>
+    </motion.div>
+  );
 
   return (
     <div className="bg-gradient-to-b from-gray-900 to-purple-900 min-h-screen text-white font-sans">
@@ -31,13 +71,15 @@ const CareersPage = () => {
             Join Our Vision
           </h1>
           <p className="text-2xl text-gray-300 mb-8">Shape the future of business process outsourcing</p>
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="bg-purple-600 text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-purple-700 transition-colors duration-300"
-          >
-            Explore Opportunities
-          </motion.button>
+          <a href="https://www.linkedin.com/company/law-marshal/jobs/">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="bg-purple-600 text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-purple-700 transition-colors duration-300"
+            >
+              Explore Opportunities
+            </motion.button>
+          </a>
         </motion.div>
         <div className="absolute inset-0 z-0">
           <svg className="w-full h-full" viewBox="0 0 1000 1000" xmlns="http://www.w3.org/2000/svg">
@@ -150,13 +192,13 @@ const CareersPage = () => {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="flex justify-center"
           >
-            <a 
-              href="mailto:careers@lawmarshalbpo.com" 
+            <button 
+              onClick={() => setShowPopup(true)}
               className="flex items-center bg-white text-purple-600 px-8 py-3 rounded-full text-lg font-semibold hover:bg-gray-100 transition-colors duration-300"
             >
               <Mail className="w-6 h-6 mr-2" />
               Apply Now
-            </a>
+            </button>
           </motion.div>
         </div>
         <div className="absolute inset-0 opacity-20">
@@ -189,6 +231,11 @@ const CareersPage = () => {
       >
         <ChevronUp className="w-6 h-6" />
       </motion.button>
+
+      {/* Apply Now Popup */}
+      <AnimatePresence>
+        {showPopup && <ApplyNowPopup />}
+      </AnimatePresence>
     </div>
   );
 };

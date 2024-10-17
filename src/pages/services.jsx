@@ -188,11 +188,11 @@ const ServicesPage = () => {
                 className={`flex flex-col md:flex-row items-center ${index % 2 === 0 ? 'md:flex-row-reverse' : ''} gap-8`}
               >
                 <div className="w-full md:w-1/2 flex-shrink-0">
-                  <div className="bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg p-6 rounded-lg shadow-lg">
-                    <service.icon className="text-blue-400 mb-4" size={40} />
-                    <h3 className="text-2xl font-semibold mb-2">{service.title}</h3>
-                    <p className="text-gray-300">{service.description}</p>
-                  </div>
+                <div className="bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg p-6 rounded-lg shadow-lg flex flex-col items-center justify-center text-center">
+  <service.icon className="text-blue-400 mb-4" size={40} />
+  <h3 className="text-2xl font-semibold mb-2">{service.title}</h3>
+  <p className="text-gray-300">{service.description}</p>
+</div>
                 </div>
 
                 <div className="w-full md:w-1/2 flex-shrink-0">
@@ -273,10 +273,6 @@ const ServicesPage = () => {
   </div>
 </section>
 
-
-
-
-      {/* ... (technology and compliance section code remains unchanged) ... */}
 
       {/* Call to Action Section */}
       <section

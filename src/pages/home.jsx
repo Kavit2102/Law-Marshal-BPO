@@ -7,11 +7,11 @@ import Industries from "../components/home/industries";
 
 const Home = () => {
   return (
-    <section className="relative overflow-x-hidden h-screen">
-      <div className="flex relative items-center overflow-hidden py-32 h-[100vh]">
+    <section className="relative overflow-x-hidden">
+      <div className="flex relative items-center overflow-hidden py-32 min-h-[100vh]">
         <video
           src="/backgrounds/hero.mp4"
-          className="hero-bg opacity-60 object-cover h-screen"
+          className="hero-bg opacity-60 object-cover w-full min-h-full"
           autoPlay
           loop
           muted
@@ -48,14 +48,6 @@ const Home = () => {
               </Link>
             </div>
           </div>
-
-          {/* Hero Image */}
-          {/* <div className="hidden md:block">
-            <img
-              src="https://www.tailwind-kit.com/images/object/10.png"
-              alt="Decorative object"
-            />
-          </div> */}
         </div>
       </div>
 

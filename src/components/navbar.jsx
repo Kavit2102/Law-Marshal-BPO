@@ -52,13 +52,6 @@ const Navbar = () => {
             ))}
           </div>
 
-          {/* Join Now Button */}
-          <Link
-            to="/"
-            className="hidden lg:inline-flex px-6 py-3 text-base font-semibold text-black bg-yellow-400 rounded-full hover:bg-yellow-500 transition-all duration-200"
-          >
-            Join Now
-          </Link>
         </nav>
       </div>
 
